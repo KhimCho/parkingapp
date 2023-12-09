@@ -1,4 +1,4 @@
-<script lang="ts">
+
 	import Modal from "../../components/modal.svelte";
     let isModalOpen = false;
     import { getFirestore, doc, getDoc, updateDoc, runTransaction,  } from "firebase/firestore";
@@ -6,7 +6,7 @@
 	import { onMount } from "svelte";
 	import { onAuthStateChanged } from "firebase/auth";
 	import { authStore } from "../../store/store";
-    import  {}
+<script lang="ts">
     let month = 0;
     let isLoading = true;
     let signedIn = false;
