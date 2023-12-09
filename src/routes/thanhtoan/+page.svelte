@@ -7,30 +7,10 @@
 	import { onAuthStateChanged } from "firebase/auth";
 	import { authStore } from "../../store/store";
     import  {}
-    let qrOpt = "";
     let month = 0;
     let isLoading = true;
     let signedIn = false;
 
-
-	async function openModal() {
-        isModalOpen = true;
-        onMount(() => {
-		console.log("Mounting...");
-		const unsubscribe = auth.onAuthStateChanged(async user => {
-            const collectionRef = firebase.firestore().collection("user");
-            const docRef = collectionRef.doc(user.uid);
-            const docSnapshot = await docRef.get();
-            const currentData = docSnapshot.data().expire;
-
-            const updatedData = currentData + 1;
-
-            await docRef.update({
-                expire: updatedData,
-            });
-		});
-	});
-    }
 </script>
 
 <div class="flex flex-col mb-8 space-y-4">
@@ -50,7 +30,7 @@
         <option value="5">5 tháng (150.000 VND)</option>
     </select>
     <p>Hình thức chuyển khoản</p>
-    <select id="ck" bind:value={qrOpt} class="select">
+    <select id="ck" bind:value={} class="select">
         <option value="momo.jpg">Momo</option>
         <option value="bidv.jpg">BIDV</option>
     </select>
