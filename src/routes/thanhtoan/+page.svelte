@@ -1,6 +1,5 @@
 
 	import Modal from "../../components/modal.svelte";
-    let isModalOpen = false;
     import { getFirestore, doc, getDoc, updateDoc, runTransaction,  } from "firebase/firestore";
     import { auth, db } from '$lib/firebase/firebase';
 	import { onMount } from "svelte";
@@ -10,7 +9,7 @@
     let month = 0;
     let isLoading = true;
     let signedIn = false;
-
+    let isModalOpen = false;
 </script>
 
 <div class="flex flex-col mb-8 space-y-4">
