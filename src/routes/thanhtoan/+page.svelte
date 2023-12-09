@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Modal from "../../components/modal.svelte";
     let isModalOpen = false;
     import { getFirestore, doc, getDoc, updateDoc, runTransaction,  } from "firebase/firestore";
