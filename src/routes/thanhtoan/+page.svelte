@@ -10,6 +10,10 @@
     let isLoading = true;
     let signedIn = false;
     let isModalOpen = false;
+    let qrOpt = "";
+    function openModal() {
+        isModalOpen = true;
+    }
 </script>
 
 <div class="flex flex-col mb-8 space-y-4">
@@ -29,7 +33,7 @@
         <option value="5">5 tháng (150.000 VND)</option>
     </select>
     <p>Hình thức chuyển khoản</p>
-    <select id="ck" bind:value={} class="select">
+    <select id="ck" bind:value={qrOpt} class="select">
         <option value="momo.jpg">Momo</option>
         <option value="bidv.jpg">BIDV</option>
     </select>
