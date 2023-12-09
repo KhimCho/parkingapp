@@ -1,6 +1,6 @@
 
 	import Modal from "../../components/modal.svelte";
-    import { getFirestore, doc, getDoc, updateDoc, runTransaction,  } from "firebase/firestore";
+    import { getFirestore, doc, getDoc, updateDoc, runTransaction  } from "firebase/firestore";
     import { auth, db } from '$lib/firebase/firebase';
 	import { onMount } from "svelte";
 	import { onAuthStateChanged } from "firebase/auth";
