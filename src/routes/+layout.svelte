@@ -38,7 +38,7 @@
 				<p class="mt-4 text-md italic leading-6 text-stone-200">© 2023 TEAM 5 WEB DEVELOPERS.</p>
 				<a href="https://www.facebook.com/khimcho.58/"><p class="mt-4 text-md italic leading-6 text-stone-200">© Huỳnh Anh Nguyễn</p></a>
 				<a href="https://www.facebook.com/han.2003z"><p class="mt-4 text-md italic leading-6 text-stone-200">© Bùi Nguyễn Phúc</p></a>
-				<a href="https://www.facebook.com/profile.php?id=100066457309235"><p class="mt-4 text-md italic leading-6 text-stone-200">© Huỳnh Minh Khiêm.</p></a>
+				<a href="https://www.facebook.com/profile.php?id=100066457309235"><p class="mt-4 text-md italic leading-6 text-stone-200">© Huỳnh Minh Khiêm</p></a>
 			</div>
 		</div>
 	</svelte:fragment>
