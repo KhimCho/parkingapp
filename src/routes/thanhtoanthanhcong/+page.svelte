@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Modal from "../../components/modal.svelte";
+    let isModalOpen = false;
     import { cartItems, addToCart, removeFromCart} from "../cart";
 
     const products = [
@@ -22,6 +24,7 @@
     let qrOpt = "";   
     let month = 0;
     async function checkout() {
+        isModalOpen = true;
     const data = await fetch("/thanhtoan", {
       method: "POST",
       headers: {
@@ -42,41 +45,13 @@
 </div>
 
 <div class="wrapper">
-
-    <p class="centered-gradient">Lựa chọn thanh toán</p> <br>
-    <div class="grid">
-        {#each products as product}
-          <div>
-            <h2>{product.name}</h2>
-            <p>Price: {product.price} VND</p>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => addToCart(product)}>Add to cart</button>
-          </div>
-        {/each}
-    </div>
-    {#if $cartItems.length > 0}
-    <h1>Cart</h1>
-
-    <div class="grid">
-      {#each $cartItems as cartItem}
-        <div>
-          <h2>{cartItem.name}</h2>
-          <p>Amount: {cartItem.amount}</p>
-          <p>Price: ${cartItem.price}</p>
-          <p>Total: ${cartItem.price * cartItem.amount}</p>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => removeFromCart(cartItem.id)}
-            >Remove from cart</button
-          >
-        </div>
-      {/each}
-    </div>
-  {/if}
-</div>
-
-<div class="flex flex-1 flex-col items-center justify-center my-10 mx-auto w-2/3 lg:w-1/3 animate-fadein">
-      <button on:click={checkout} class="text-white bg-blue-700 hover:bg-blue-800 transition-all 
+  <p class="centered-gradient">Thanh toán thành công</p> <br>
+  <div class="flex flex-1 flex-col items-center justify-center my-10 mx-auto w-2/3 lg:w-1/3 animate-fadein">
+      <a href="/thanhtoan"><button  class="text-white bg-blue-700 hover:bg-blue-800 transition-all 
       shadow-xl shadow-blue-800/50 rounded-3xl py-3 px-8 font-bold inline-block mr-4">
-      Thanh toán
-  </button>
+      Quay trở lại
+    </button> </a>
+  </div>
 </div>
 
 <style>
