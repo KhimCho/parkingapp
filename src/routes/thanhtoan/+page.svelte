@@ -1,19 +1,41 @@
-
-	import Modal from "../../components/modal.svelte";
-    import { getFirestore, doc, getDoc, updateDoc, runTransaction  } from "firebase/firestore";
-    import { auth, db } from '$lib/firebase/firebase';
-	import { onMount } from "svelte";
-	import { onAuthStateChanged } from "firebase/auth";
-	import { authStore } from "../../store/store";
 <script lang="ts">
-    let month = 0;
-    let isLoading = true;
-    let signedIn = false;
+	import Modal from "../../components/modal.svelte";
     let isModalOpen = false;
-    let qrOpt = "";
-    function openModal() {
+    import { cartItems, addToCart, removeFromCart} from "../cart";
+
+    const products = [
+    {
+      id: 1,
+      name: "1 tháng",
+      price: 40000,
+    },
+    {
+      id: 2,
+      name: "2 tháng",
+      price: 80000,
+    },
+    {
+      id: 3,
+      name: "3 tháng",
+      price: 120000,
+    },
+  ];
+
+    let qrOpt = "";   
+    let month = 0;
+    async function checkout() {
         isModalOpen = true;
-    }
+    const data = await fetch("/thanhtoan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: $cartItems,
+      }),
+    }).then((data) => data.json());
+    window.location.replace(data.url);
+  }
 </script>
 
 <div class="flex flex-col mb-8 space-y-4">
@@ -24,23 +46,37 @@
 
 <div class="wrapper">
 
-    <p>Lựa chọn thanh toán</p>
-    <select bind:value={month} class="select" size="4">
-        <option value="1">1 tháng (40.000 VND)</option>
-        <option value="2">2 tháng (70.000 VND)</option>
-        <option value="3">3 tháng (100.000 VND)</option>
-        <option value="4">4 tháng (120.000 VND)</option>
-        <option value="5">5 tháng (150.000 VND)</option>
-    </select>
-    <p>Hình thức chuyển khoản</p>
-    <select id="ck" bind:value={qrOpt} class="select">
-        <option value="momo.jpg">Momo</option>
-        <option value="bidv.jpg">BIDV</option>
-    </select>
+    <p class="centered-gradient">Lựa chọn thanh toán</p> <br>
+    <div class="grid">
+        {#each products as product}
+          <div>
+            <h2>{product.name}</h2>
+            <p>Price: {product.price} VND</p>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => addToCart(product)}>Add to cart</button>
+          </div>
+        {/each}
+    </div>
+    {#if $cartItems.length > 0}
+    <h1>Cart</h1>
+
+    <div class="grid">
+      {#each $cartItems as cartItem}
+        <div>
+          <h2>{cartItem.name}</h2>
+          <p>Amount: {cartItem.amount}</p>
+          <p>Price: ${cartItem.price}</p>
+          <p>Total: ${cartItem.price * cartItem.amount}</p>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" on:click={() => removeFromCart(cartItem.id)}
+            >Remove from cart</button
+          >
+        </div>
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <div class="flex flex-1 flex-col items-center justify-center my-10 mx-auto w-2/3 lg:w-1/3 animate-fadein">
-    <button on:click={openModal} class="text-white bg-blue-700 hover:bg-blue-800 transition-all 
+    <button on:click={checkout} class="text-white bg-blue-700 hover:bg-blue-800 transition-all 
     shadow-xl shadow-blue-800/50 rounded-3xl py-3 px-8 font-bold inline-block mr-4">
     Thanh toán
 </button>
@@ -67,8 +103,23 @@
     padding: clamp(1rem, 2vw, 3rem);
     font-weight: bold;
     }
-    .id {
-        display: flex;
-    }
+    .grid {
+    display: grid;
+    grid-gap: 1em;
+    margin-bottom: 5em;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  h2 {
+    padding-bottom: 0.5em;
+    border-bottom: 2px dotted black;
+  }
+  .centered-gradient {
+    font-size: 24px;
+  text-align: center;
+  background: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); /* Replace the color values with your desired gradient */
+  background-clip: text;
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  color: transparent;
+}
 
 </style>
