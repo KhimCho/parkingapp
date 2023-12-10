@@ -29,8 +29,8 @@ export const POST: RequestHandler = async ({ request }) => {
       allowed_countries: ["NO"],
     },
     mode: "payment",
-    success_url: `http://localhost:5173/datcho`,
-    cancel_url: `http://localhost:5173/`,
+    success_url: `https://uitparking.netlify.app/`,
+    cancel_url: `https://uitparking.netlify.app/thanhtoan`,
     phone_number_collection: {
       enabled: true,
     },
