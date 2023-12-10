@@ -1,6 +1,6 @@
-import { stripe } from "../stripe";
+import { stripe } from "./stripe";
 import type { RequestHandler } from "@sveltejs/kit";
-import type { CartItem } from "../cart";
+import type { CartItem } from "./cart";
 import { env } from "$env/dynamic/private";
 
 export const POST: RequestHandler = async ({ request }) => {
